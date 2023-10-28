@@ -56,6 +56,12 @@ int main()
     {
         // clear old buffer
         memset(&buffer[0], 0, sizeof(buffer));
+
+        std::string response = "Welcome to the server";
+        response += "\n*EXIT* : shut down the server\n";
+        response += "*STORY* : get a story from the server\n";
+        send(connection, response.c_str(), response.size(), 0);
+
         // catch new incomming message
         auto bytesRead = read(connection, buffer, 100);
 
