@@ -47,10 +47,16 @@ int main()
     }
 
     // read from connection
-    char buffer[100];
+    char *buffer = new char[100];
+    const char *exitCode = "EXIT";
+    const int len = 4;
 
-    auto bytesRead = read(connection, buffer, 100);
-    std::cout << "The Message was: " << buffer << "\n";
+    while (!std::equal(exitCode, exitCode + len, buffer))
+    {
+        auto bytesRead = read(connection, buffer, 100);
+
+        std::cout << "The Message was: " << buffer << "\n";
+    }
 
     // send message to the connection
     std::string response = "Good talking to you\n";
