@@ -6,6 +6,8 @@
 #include <cstring>
 #include "story.h"
 
+void printMenu(int connection);
+
 int main()
 {
     // create socket
@@ -55,15 +57,12 @@ int main()
     const char *storyCode = "*STORY*";
     const int storyLen = 7;
 
+    printMenu(connection);
+
     while (!std::equal(exitCode, exitCode + exitLen, buffer))
     {
         // clear old buffer
         memset(&buffer[0], 0, sizeof(buffer));
-
-        std::string response = "Welcome to the server";
-        response += "\n*EXIT* : shut down the server\n";
-        response += "*STORY* : get a story from the server\n";
-        send(connection, response.c_str(), response.size(), 0);
 
         // catch new incomming message
         auto bytesRead = read(connection, buffer, 100);
@@ -78,10 +77,18 @@ int main()
     }
 
     // send message to the connection
-    std::string response = "Server Shutting Down";
+    std::string response = "Server Shutting Down\n";
     send(connection, response.c_str(), response.size(), 0);
 
     // close connection
     close(connection);
     close(connSocked);
+}
+
+void printMenu(int connection)
+{
+    std::string response = "Welcome to the server";
+    response += "\n*EXIT* : shut down the server\n";
+    response += "*STORY* : get a story from the server\n";
+    send(connection, response.c_str(), response.size(), 0);
 }
