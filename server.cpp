@@ -59,6 +59,4 @@ int main()
     // close connection
     close(connection);
     close(connSocked);
-
-    // end
 }
