@@ -4,6 +4,7 @@
 #include <iostream>
 #include <unistd.h>
 #include <cstring>
+#include "story.h"
 
 int main()
 {
@@ -50,9 +51,11 @@ int main()
     // read from connection
     char buffer[100];
     const char *exitCode = "*EXIT*";
-    const int len = 4;
+    const int exitLen = 6;
+    const char *storyCode = "*STORY*";
+    const int storyLen = 7;
 
-    while (!std::equal(exitCode, exitCode + len, buffer))
+    while (!std::equal(exitCode, exitCode + exitLen, buffer))
     {
         // clear old buffer
         memset(&buffer[0], 0, sizeof(buffer));
@@ -64,6 +67,12 @@ int main()
 
         // catch new incomming message
         auto bytesRead = read(connection, buffer, 100);
+
+        if (std::equal(storyCode, storyCode + storyLen, buffer))
+        {
+            Story s;
+            s.TestPrint(connection);
+        }
 
         std::cout << "The Message was: " << buffer << "\n";
     }
