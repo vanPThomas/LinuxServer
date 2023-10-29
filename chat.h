@@ -28,6 +28,14 @@ public:
             {
                 std::string exitMessage = "You are now leaving the chat.\n";
                 send(connection, exitMessage.c_str(), exitMessage.size(), 0);
+                for (auto it = connections.begin(); it != connections.end(); ++it)
+                {
+                    if (it->first == connection)
+                    {
+                        std::string leavingMessage = connections[connection] + " has left the chat.\n";
+                        send(it->first, leavingMessage.c_str(), leavingMessage.size(), 0);
+                    }
+                }
                 return;
             }
 

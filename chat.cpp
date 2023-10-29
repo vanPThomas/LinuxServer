@@ -7,8 +7,6 @@
 
 void Chat::addConnectionToChat(int connection)
 {
-    std::string welcome = "Welcome to the Chat session\n";
-    send(connection, welcome.c_str(), welcome.size(), 0);
     std::string askName = "Please Enter your name : ";
     send(connection, askName.c_str(), askName.size(), 0);
     char buffer[100];
