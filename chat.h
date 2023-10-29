@@ -15,7 +15,7 @@ public:
         std::string welcomeMessage = "Welcome to the chat window!\n";
         send(connection, welcomeMessage.c_str(), welcomeMessage.size(), 0);
         std::string nameString = connections[connection] + ": ";
-        char buffer[100];
+        char buffer[1024];
         const char *exitCode = "*EXIT*";
         const int exitLen = 6;
         while (!std::equal(exitCode, exitCode + exitLen, buffer))

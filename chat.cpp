@@ -9,7 +9,7 @@ void Chat::addConnectionToChat(int connection)
 {
     std::string askName = "Please Enter your name : ";
     send(connection, askName.c_str(), askName.size(), 0);
-    char buffer[100];
+    char buffer[1024];
     memset(&buffer[0], 0, sizeof(buffer));
 
     auto bytesRead = read(connection, buffer, 100);
