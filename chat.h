@@ -33,7 +33,7 @@ public:
 
             for (auto it = connections.begin(); it != connections.end(); ++it)
             {
-                if (it->first == connection)
+                if (it->first != connection)
                 {
                     send(it->first, nameString.c_str(), nameString.size(), 0);
                     send(it->first, message.c_str(), message.size(), 0);
