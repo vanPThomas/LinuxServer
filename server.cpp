@@ -5,6 +5,7 @@
 #include <unistd.h>
 #include <cstring>
 #include "story.h"
+#include "chat.h"
 
 void printMenu(int connection);
 
@@ -56,9 +57,12 @@ int main()
     const int exitLen = 6;
     const char *storyCode = "*STORY*";
     const int storyLen = 7;
+    const char *chatCode = "*CHAT*";
+    const int chatLen = 6;
 
     printMenu(connection);
 
+    Chat c;
     while (!std::equal(exitCode, exitCode + exitLen, buffer))
     {
         // clear old buffer
@@ -71,6 +75,10 @@ int main()
         {
             Story s;
             s.TestPrint(connection);
+        }
+        else if (std::equal(chatCode, chatCode + chatLen, buffer))
+        {
+            c.addConnectionToChat(connection);
         }
 
         std::cout << "The Message was: " << buffer << "\n";
@@ -90,5 +98,6 @@ void printMenu(int connection)
     std::string response = "Welcome to the server";
     response += "\n*EXIT* : shut down the server\n";
     response += "*STORY* : get a story from the server\n";
+    response += "*CHAT* : Enter chat\n";
     send(connection, response.c_str(), response.size(), 0);
 }
