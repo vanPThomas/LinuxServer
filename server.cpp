@@ -79,6 +79,7 @@ int main()
         else if (std::equal(chatCode, chatCode + chatLen, buffer))
         {
             c.addConnectionToChat(connection);
+            c.enterChat(connection);
         }
 
         std::cout << "The Message was: " << buffer << "\n";

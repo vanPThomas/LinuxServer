@@ -15,9 +15,8 @@ void Chat::addConnectionToChat(int connection)
     memset(&buffer[0], 0, sizeof(buffer));
 
     auto bytesRead = read(connection, buffer, 100);
-    std::string name(buffer);
-    std::string cutName = name.substr(0, name.size() - 2);
+    std::string uncutName(buffer);
+    std::string cutName = uncutName.substr(0, uncutName.size() - 2);
 
-    std::string confirmation = "Your name is: " + name;
-    send(connection, confirmation.c_str(), confirmation.size(), 0);
+    connections[connection] = cutName;
 }
