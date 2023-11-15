@@ -122,11 +122,11 @@ int main()
                     buffer[valread] = '\0';
                     std::cout << buffer << "\n";
                     // send(sd, buffer, strlen(buffer), 0);
-                    for (int sdTarget : clientSocket)
+                    for (int i = 0; i < maxClients; i++)
                     {
+                        int sdTarget = clientSocket[i];
                         if (sdTarget != 0 && sdTarget != sd)
                         {
-
                             send(sdTarget, buffer, strlen(buffer), 0);
                         }
                     }
@@ -154,7 +154,7 @@ void closeClientSocket(int clientSocket[], int index)
 
 void handleSystemCallError(std::string errorMsg)
 {
-    std::cout << errorMsg << ", errno: " << errno << "\n";
+    std::cerr << errorMsg << ", errno: " << errno << "\n";
     exit(EXIT_FAILURE);
 }
 
@@ -175,6 +175,7 @@ int initializeServerSocket(int port)
         handleSystemCallError("Failed to setsockopt");
     }
 
+    // Set up the server address structure
     sockaddr_in address;
     address.sin_family = AF_INET;
     address.sin_addr.s_addr = INADDR_ANY;
