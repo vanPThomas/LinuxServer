@@ -17,7 +17,6 @@
 #define TRUE 1
 #define FALSE 0
 
-void printMenu(int connection);
 void closeClientSocket(int clientSocket[], int index);
 int initializeServerSocket(int port);
 
@@ -188,7 +187,7 @@ int initializeServerSocket(int port)
 
     std::cout << "Listening on port " << port << "\n";
 
-    // listen for connection, max 10 connections
+    // listen for connection, max 30 connections
     if (listen(serverSocket, maxConnectionAmount) < 0)
     {
         handleSystemCallError("Failed to listen on socket");
