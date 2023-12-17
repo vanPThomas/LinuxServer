@@ -8,6 +8,11 @@
 #include <sys/types.h>
 #include <arpa/inet.h>
 #include <sys/types.h>
+#include <openssl/ssl.h>
+#include <openssl/err.h>
+#include <openssl/conf.h>
+#include <openssl/evp.h>
+#include <openssl/rand.h>
 
 #define TRUE 1
 #define FALSE 0
@@ -44,6 +49,9 @@ int main()
     {
         clientSocket[i] = 0;
     }
+
+    // EVP_PKEY *key = generateKeyPair();
+    // std::cout << key << "\n";
 
     // grab connection
     addrlen = sizeof(address);
@@ -135,15 +143,6 @@ int main()
         }
     }
     return 0;
-}
-
-void printMenu(int connection)
-{
-    std::string response = "Welcome to the server";
-    response += "\n*EXIT* : shut down the server\n";
-    response += "*STORY* : get a story from the server\n";
-    response += "*CHAT* : Enter chat\n";
-    send(connection, response.c_str(), response.size(), 0);
 }
 
 void closeClientSocket(int clientSocket[], int index)
