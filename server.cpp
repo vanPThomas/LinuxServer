@@ -4,7 +4,6 @@
 #include <iostream>
 #include <unistd.h>
 #include <cstring>
-#include "chat.h"
 #include <sys/types.h>
 #include <arpa/inet.h>
 #include <sys/types.h>
